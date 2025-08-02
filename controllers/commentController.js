@@ -29,7 +29,9 @@ export const getCommentsByBlog = async (req, res) => {
 	const { blogId } = req.params
 
 	try {
-		const comments = await Comment.find({ blog: blogId }).sort({ createdAt: -1 })
+		const comments = await Comment.find({ blog: blogId })
+			.sort({ createdAt: -1 })
+			.populate('user', 'username email')
 
 		return res.status(200).json({
 			message: `Comments for blog #${ blogId } retrieved successfully.`,

@@ -27,7 +27,10 @@ export const createBlog = async (req, res) => {
 
 export const getAllBlogs = async (_, res) => {
 	try {
-		const blogs = await Blog.find().sort({ createdAt: -1 })
+		const blogs = await Blog.find()
+			.sort({ createdAt: -1 })
+			.populate('user', 'username email')
+			.populate('tags', 'name')
 
 		return res.status(200).json({ 
 			message: 'Blogs retrieved successfully.',
@@ -46,6 +49,8 @@ export const getBlog = async (req, res) => {
 
 	try {
 		const blog = await Blog.findById(id)
+			.populate('user', 'username email')
+			.populate('tags', 'name')
 
 		if (!blog) {
 			return res.status(404).json({ 
