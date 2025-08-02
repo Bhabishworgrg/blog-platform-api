@@ -5,13 +5,20 @@ export const createTag = async (req, res) => {
 	const { name } = req.body
 
 	try {
+		const existingTag = await Tag.findOne({ name: name.trim() })
+		if (existingTag) {
+			return res.status(409).json({
+				message: `Tag "${ name }" already exists. Please choose a different name.`
+			})
+		}
+
 		const tag = new Tag({ 
 			name: name 
 		})
 		await tag.save()
 
 		return res.status(201).json({
-			message: `Tag #${tag._id} created successfully.`,
+			message: `Tag #${ tag._id } created successfully.`,
 			data: tag
 		})
 	} catch (error) {
@@ -45,7 +52,7 @@ export const getTagsByBlog = async (req, res) => {
 		const tags = await Tag.find({ blogs: blogId }).sort({ createdAt: -1 })
 
 		return res.status(200).json({
-			message: `Tags for blog #${blogId} retrieved successfully.`,
+			message: `Tags for blog #${ blogId } retrieved successfully.`,
 			data: tags
 		})
 	} catch (error) {
@@ -61,6 +68,13 @@ export const updateTag = async (req, res) => {
 	const { name } = req.body
 
 	try {
+		const existingTag = await Tag.findOne({ name: name.trim() })
+		if (existingTag && existingTag._id.toString() !== id) {
+			return res.status(409).json({
+				message: `Tag "${ name }" already exists. Please choose a different name.`
+			})
+		}
+
 		const tag = await Tag.findByIdAndUpdate(
 			id,
 			{ name: name },
@@ -69,18 +83,18 @@ export const updateTag = async (req, res) => {
 
 		if (!tag) {
 			return res.status(404).json({
-				message: `Tag #${id} not found.`
+				message: `Tag #${ id } not found.`
 			})
 		}
 
 		return res.status(200).json({
-			message: `Tag #${id} updated successfully.`,
+			message: `Tag #${ id } updated successfully.`,
 			data: tag
 		})
 	} catch (error) {
 		if (error.name === 'CastError') {
 			return res.status(400).json({
-				message: `${id} is not a valid tag ID. Please check your input.`
+				message: `${ id } is not a valid tag ID. Please check your input.`
 			})
 		}
 
@@ -99,17 +113,17 @@ export const deleteTag = async (req, res) => {
 
 		if (!tag) {
 			return res.status(404).json({
-				message: `Tag #${id} not found.`
+				message: `Tag #${ id } not found.`
 			})
 		}
 
 		return res.status(200).json({
-			message: `Tag #${id} deleted successfully.`,
+			message: `Tag #${ id } deleted successfully.`,
 		})
 	} catch (error) {
 		if (error.name === 'CastError') {
 			return res.status(400).json({
-				message: `${id} is not a valid tag ID. Please check your input.`
+				message: `${ id } is not a valid tag ID. Please check your input.`
 			})
 		}
 
