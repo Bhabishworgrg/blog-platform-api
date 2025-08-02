@@ -14,12 +14,6 @@ export const createBlog = async (req, res) => {
 			data: blog
 		})
 	} catch (error) {
-		if (error.name === 'ValidationError') {
-			return res.status(400).json({ 
-				message: 'Invalid data provided. Please check your input.'
-			})
-		}
-
 		return res.status(500).json({ 
 			message: 'An unexpected error occurred while creating the blog.'
 		})
@@ -96,12 +90,6 @@ export const updateBlog = async (req, res) => {
 			data: blog
 		})
 	} catch (error) {
-		if (error.name === 'ValidationError') {
-			return res.status(400).json({ 
-				message: 'Invalid data provided. Please check your input.'
-			})
-		}
-
 		if (error.name === 'CastError') {
 			return res.status(400).json({ 
 				message: `${id} is not a valid blog ID. Please check your input.`

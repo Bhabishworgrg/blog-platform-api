@@ -5,11 +5,15 @@ const blogSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		trim: true,
+		minlength: 10,
+		maxlength: 100
 	},
 	description: {
 		type: String,
 		required: true,
 		trim: true,
+		minlength: 100,
+		maxlength: 10000
 	},
 }, { timestamps: true })
 
