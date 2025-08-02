@@ -6,11 +6,14 @@ export const createBlog = async (req, res) => {
 
 	try {
 
-		const blog = new Blog({ title, description })
+		const blog = new Blog({
+			title: title,
+			description: description 
+		})
 		await blog.save()
 
 		return res.status(201).json({ 
-			message: `Blog #${blog._id} created successfully`,
+			message: `Blog #${ blog._id } created successfully`,
 			data: blog
 		})
 	} catch (error) {
@@ -45,18 +48,18 @@ export const getBlog = async (req, res) => {
 
 		if (!blog) {
 			return res.status(404).json({ 
-				message: `Blog #${id} not found.`
+				message: `Blog #${ id } not found.`
 			})
 		}
 
 		return res.status(200).json({ 
-			message: `Blog #${id} retrieved successfully.`,
+			message: `Blog #${ id } retrieved successfully.`,
 			data: blog
 		})
 	} catch (error) {
 		if (error.name === 'CastError') {
 			return res.status(400).json({ 
-				message: `${id} is not a valid blog ID. Please check your input.`
+				message: `${ id } is not a valid blog ID. Please check your input.`
 			})
 		}
 
@@ -72,27 +75,26 @@ export const updateBlog = async (req, res) => {
 	const { title, description } = req.body
 
 	try {
-
 		const blog = await Blog.findByIdAndUpdate(
 			id,
-			{ title, description },
+			{ title: title, description: description },
 			{ new: true, runValidators: true }
 		)
 
 		if (!blog) {
 			return res.status(404).json({ 
-				message: `Blog #${id} not found.`
+				message: `Blog #${ id } not found.`
 			})
 		}
 
 		return res.status(200).json({ 
-			message: `Blog #${id} updated successfully.`,
+			message: `Blog #${ id } updated successfully.`,
 			data: blog
 		})
 	} catch (error) {
 		if (error.name === 'CastError') {
 			return res.status(400).json({ 
-				message: `${id} is not a valid blog ID. Please check your input.`
+				message: `${ id } is not a valid blog ID. Please check your input.`
 			})
 		}
 
@@ -111,17 +113,17 @@ export const deleteBlog = async (req, res) => {
 
 		if (!blog) {
 			return res.status(404).json({ 
-				message: `Blog #${id} not found.`
+				message: `Blog #${ id } not found.`
 			})
 		}
 
 		return res.status(200).json({ 
-			message: `Blog #${id} deleted successfully.`,
+			message: `Blog #${ id } deleted successfully.`,
 		})
 	} catch (error) {
 		if (error.name === 'CastError') {
 			return res.status(400).json({ 
-				message: `${id} is not a valid blog ID. Please check your input.`
+				message: `${ id } is not a valid blog ID. Please check your input.`
 			})
 		}
 
