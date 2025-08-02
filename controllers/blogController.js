@@ -8,7 +8,8 @@ export const createBlog = async (req, res) => {
 		const blog = new Blog({
 			title: title,
 			description: description,
-			tags: tags
+			tags: tags,
+			user: req.user.id
 		})
 		await blog.save()
 
