@@ -31,3 +31,6 @@ Thumbs.db
 
 # Cache files
 .cache/
+
+# Kitty Session files
+session.kitty
