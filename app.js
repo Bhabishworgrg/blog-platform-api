@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 
 import connectDB from './config/db.js'
 import blogRoutes from './routes/blogRoutes.js'
+import commentRoutes from './routes/commentRoutes.js'
 
 dotenv.config()
 
@@ -12,6 +13,7 @@ const app = express()
 
 app.use(express.json())
 app.use('/api/v1/blogs', blogRoutes)
+app.use('/api/v1/comments', commentRoutes)
 
 app.get('/', (_, res) => 
 	res.send('Welcome to Blog API')
