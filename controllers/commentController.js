@@ -28,10 +28,24 @@ export const createComment = async (req, res) => {
 export const getCommentsByBlog = async (req, res) => {
 	const { blogId } = req.params
 
+	const { search, sortBy, sortOrder } = req.query
+
+	const query = { blog: blogId }
+
+	if (search) {
+		query.content = { $regex: search, $options: 'i' }
+	}
+
+	const sortOptions = { createdAt: -1 }
+	if (sortBy) {
+		const order = sortOrder === 'desc' ? -1 : 1
+		sortOptions = { [sortBy]: order }
+	}
+
 	try {
-		const comments = await Comment.find({ blog: blogId })
-			.sort({ createdAt: -1 })
+		const comments = await Comment.find(query)
 			.populate('user', 'username email')
+			.sort(sortOptions)
 
 		return res.status(200).json({
 			message: `Comments for blog #${ blogId } retrieved successfully.`,

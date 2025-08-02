@@ -25,12 +25,37 @@ export const createBlog = async (req, res) => {
 }
 
 
-export const getAllBlogs = async (_, res) => {
+export const getAllBlogs = async (req, res) => {
+	const { search, tags, user, sortBy, sortOrder } = req.query
+
+	const query = {}
+
+	if (search) {
+		query.$or = [
+			{ title: { $regex: search, $options: 'i' } },
+			{ description: { $regex: search, $options: 'i' } }
+		]
+	}
+
+	if (tags) {
+		query.tags = { $all: tags.split(',') }
+	}
+
+	if (user) {
+		query.user = user
+	}
+
+	const sortOptions = { createdAt: -1 }
+	if (sortBy) {
+		const order = sortOrder === 'desc' ? -1 : 1
+		sortOptions = { [sortBy]: order }
+	}
+
 	try {
-		const blogs = await Blog.find()
-			.sort({ createdAt: -1 })
+		const blogs = await Blog.find(query)
 			.populate('user', 'username email')
 			.populate('tags', 'name')
+			.sort(sortOptions)
 
 		return res.status(200).json({ 
 			message: 'Blogs retrieved successfully.',
