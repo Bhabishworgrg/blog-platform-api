@@ -15,6 +15,10 @@ const blogSchema = new mongoose.Schema({
 		minlength: 100,
 		maxlength: 10000
 	},
+	tags: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Tag'
+	}],
 }, { timestamps: true })
 
 export default mongoose.model('Blog', blogSchema)
