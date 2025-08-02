@@ -11,10 +11,6 @@ const blogSchema = new mongoose.Schema({
 		required: true,
 		trim: true,
 	},
-	createdAt: {
-		type: Date,
-		default: Date.now,
-	}
-})
+}, { timestamps: true })
 
 export default mongoose.model('Blog', blogSchema)
