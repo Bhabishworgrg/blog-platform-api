@@ -1,5 +1,7 @@
 import User from '../models/User.js'
 
+import generateToken from '../utility/generateToken.js'
+
 export const registerUser = async (req, res) => {
 	const { username, email, password } = req.body
 
@@ -47,8 +49,10 @@ export const loginUser = async (req, res) => {
 			})
 		}
 
+		const token = generateToken(user._id)
 		return res.status(200).json({
-			message: 'Login successful.'
+			message: 'Login successful.',
+			token: token
 		})
 	} catch (error) {
 		return res.status(500).json({
