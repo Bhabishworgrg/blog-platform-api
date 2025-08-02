@@ -15,22 +15,23 @@ import {
 	getCommentsByBlog
 } from '../controllers/commentController.js'
 
-import validateTag from '../middleware/validateTag.js'
 import {
 	getTagsByBlog
 } from '../controllers/tagController.js'
 
+import requireAuth from '../middleware/requireAuth.js'
+
 const router = express.Router()
 
-router.post('/', validateBlog, createBlog)
-router.get('/', validateBlog, getAllBlogs)
-router.get('/:id', validateBlog, getBlog)
-router.patch('/:id', validateBlog, updateBlog)
-router.delete('/:id', validateBlog, deleteBlog)
+router.post('/', requireAuth, validateBlog, createBlog)
+router.get('/', getAllBlogs)
+router.get('/:id', getBlog)
+router.patch('/:id', requireAuth, validateBlog, updateBlog)
+router.delete('/:id', requireAuth, deleteBlog)
 
-router.post('/:blogId/comments', validateComment, createComment)
-router.get('/:blogId/comments', validateComment, getCommentsByBlog)
+router.post('/:blogId/comments', requireAuth, validateComment, createComment)
+router.get('/:blogId/comments', getCommentsByBlog)
 
-router.get('/:blogId/tags', validateTag, getTagsByBlog)
+router.get('/:blogId/tags', getTagsByBlog)
 
 export default router

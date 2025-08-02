@@ -8,18 +8,19 @@ import {
 	deleteTag
 } from '../controllers/tagController.js'
 
-import validateBlog from '../middleware/validateBlog.js'
 import {
 	getBlogsByTag
 } from '../controllers/blogController.js'
 
+import requireAuth from '../middleware/requireAuth.js'
+
 const router = express.Router()
 
-router.post('/', validateTag, createTag)
-router.get('/', validateTag, getAllTags)
-router.patch('/:id', validateTag, updateTag)
-router.delete('/:id', validateTag, deleteTag)
+router.post('/', requireAuth, validateTag, createTag)
+router.get('/', getAllTags)
+router.patch('/:id', requireAuth, validateTag, updateTag)
+router.delete('/:id', requireAuth, deleteTag)
 
-router.get('/:tagId/blogs', validateBlog, getBlogsByTag)
+router.get('/:tagId/blogs', getBlogsByTag)
 
 export default router

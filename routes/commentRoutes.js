@@ -6,9 +6,11 @@ import {
 	deleteComment
 } from '../controllers/commentController.js'
 
+import requireAuth from '../middleware/requireAuth.js'
+
 const router = express.Router()
 
-router.patch('/:id', validateComment, updateComment)
-router.delete('/:id', validateComment, deleteComment)
+router.patch('/:id', requireAuth, validateComment, updateComment)
+router.delete('/:id', requireAuth, deleteComment)
 
 export default router
