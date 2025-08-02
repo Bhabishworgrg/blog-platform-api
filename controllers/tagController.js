@@ -45,24 +45,6 @@ export const getAllTags = async (_, res) => {
 }
 
 
-export const getTagsByBlog = async (req, res) => {
-	const { blogId } = req.params
-
-	try {
-		const tags = await Tag.find({ blogs: blogId }).sort({ createdAt: -1 })
-
-		return res.status(200).json({
-			message: `Tags for blog #${ blogId } retrieved successfully.`,
-			data: tags
-		})
-	} catch (error) {
-		return res.status(500).json({
-			message: 'An unexpected error occurred while retrieving tags.'
-		})
-	}
-}
-
-
 export const updateTag = async (req, res) => {
 	const { id } = req.params
 	const { name } = req.body
