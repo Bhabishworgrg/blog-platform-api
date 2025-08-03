@@ -6,10 +6,17 @@ export const registerUser = async (req, res) => {
 	const { username, email, password } = req.body
 
 	try {
-		const existingUser = await User.findOne({ email })
-		if (existingUser) {
+		const emailExists = await User.findOne({ email })
+		if (emailExists) {
 			return res.status(409).json({
 				message: 'Email already registered. Please use a different email.'
+			})
+		}
+
+		const usernameExists = await User.findOne({ username })
+		if (usernameExists) {
+			return res.status(409).json({
+				message: 'Username already taken. Please choose a different username.'
 			})
 		}
 
