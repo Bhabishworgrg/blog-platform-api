@@ -36,7 +36,7 @@ export const getCommentsByBlog = async (req, res) => {
 		query.content = { $regex: search, $options: 'i' }
 	}
 
-	const sortOptions = { createdAt: -1 }
+	let sortOptions = { createdAt: -1 }
 	if (sortBy) {
 		const order = sortOrder === 'desc' ? -1 : 1
 		sortOptions = { [sortBy]: order }

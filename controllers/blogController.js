@@ -45,7 +45,7 @@ export const getAllBlogs = async (req, res) => {
 		query.user = user
 	}
 
-	const sortOptions = { createdAt: -1 }
+	let sortOptions = { createdAt: -1 }
 	if (sortBy) {
 		const order = sortOrder === 'desc' ? -1 : 1
 		sortOptions = { [sortBy]: order }
