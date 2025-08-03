@@ -2,12 +2,12 @@
 
 ---
 
-## Prequisites
+# Prequisites
 - Node.js (v24 or later)
 - npm (v11 or later)
 - MongoDB (v8.0 or later)
 
-## Setup
+# Setup
 1. Clone the repository:
 ```bash
 git clone https://github.com/Bhabishworgrg/blog-api.git
@@ -24,7 +24,7 @@ npm install
 cp .env.example .env
 ```
 
-## Usage
+# Usage
 1. Start the development server:
 ```bash
 npm run dev
@@ -35,10 +35,10 @@ npm run dev
 
 ---
 
-## Endpoints
+# Endpoints
 
-### Authentication
-- **POST** `/api/v1/auth/register`: Register a new user
+## Authentication
+### POST `/api/v1/auth/register`: Register a new user
 
 Body:
 ```json
@@ -62,7 +62,7 @@ Response:
 }
 ```
 
-- **POST** `/api/v1/auth/login`: Login a user
+### POST `/api/v1/auth/login`: Login a user
 
 Body:
 ```json
@@ -83,8 +83,9 @@ Response:
 }
 ```
 
-### Tags
-- **POST** `/api/v1/tags`: Create a new tag
+
+## Tags
+### POST `/api/v1/tags`: Create a new tag
 
 Authentication required. (Bearer token in headers)
 
@@ -112,7 +113,7 @@ Response:
 }
 ```
 
-- **GET** `/api/v1/tags`: Get all tags
+### GET `/api/v1/tags`: Get all tags
 Response:
 ```json
 {
@@ -128,7 +129,7 @@ Response:
 }
 ```
 
-- **PATCH** `/api/v1/tags/:id`: Update a tag by ID
+### PATCH `/api/v1/tags/:id`: Update a tag by ID
 
 Authentication required. (Bearer token in headers)
 
@@ -156,7 +157,7 @@ Response:
 }
 ```
 
-- **DELETE** `/api/v1/tags/:id`: Delete a tag by ID
+### DELETE `/api/v1/tags/:id`: Delete a tag by ID
 
 Authentication required. (Bearer token in headers)
 
@@ -167,8 +168,9 @@ Response:
 }
 ```
 
-### Blogs
-- **POST** `/api/v1/blogs`: Create a new blog post
+
+## Blogs
+### POST `/api/v1/blogs`: Create a new blog post
 
 Authentication required. (Bearer token in headers)
 
@@ -204,7 +206,7 @@ Response:
 }
 ```
 
-- **GET** `/api/v1/blogs?search=<searchTerm>&sortBy=<field>&sortOrder=<desc|asc>`: Get blogs
+### GET `/api/v1/blogs?search=<searchTerm>&sortBy=<field>&sortOrder=<desc|asc>`: Get blogs
 
 Query:
 - `search`: To filter blogs by title or description.
@@ -239,7 +241,7 @@ Response:
 }
 ```
 
-- **GET** `/api/v1/blogs/:id`: Get a blog by ID
+### GET `/api/v1/blogs/:id`: Get a blog by ID
 
 Response:
 ```json
@@ -267,7 +269,7 @@ Response:
 }
 ```
 
-- **PATCH** `/api/v1/blogs/:id`: Update a blog by ID
+### PATCH `/api/v1/blogs/:id`: Update a blog by ID
 
 Authentication required. (Bearer token in headers)
 
@@ -303,7 +305,7 @@ Response:
 }
 ```
 
-- **DELETE** `/api/v1/blogs/:id`: Delete a blog by ID
+### DELETE `/api/v1/blogs/:id`: Delete a blog by ID
 
 Authentication required. (Bearer token in headers)
 
@@ -314,8 +316,9 @@ Response:
 }
 ```
 
-### Comments
-- **POST** `/api/v1/blogs/:blogId/comments`: Create a comment to a blog post
+
+## Comments
+### POST `/api/v1/blogs/:blogId/comments`: Create a comment to a blog post
 
 Authentication required. (Bearer token in headers)
 
@@ -346,7 +349,7 @@ Response:
 }
 ```
 
-- **GET** `/api/v1/blogs/:blogId/comments?search=<searchTerm>&sortBy=<field>&sortOrder=<desc|asc>`: Get comments for a blog post
+### GET `/api/v1/blogs/:blogId/comments?search=<searchTerm>&sortBy=<field>&sortOrder=<desc|asc>`: Get comments for a blog post
 
 Query:
 - `search`: To filter comments by `content`.
@@ -375,7 +378,7 @@ Response:
 }
 ```
 
-- **PATCH** `/api/v1/comments/:id`: Update a comment by ID
+### PATCH `/api/v1/comments/:id`: Update a comment by ID
 
 Authentication required. (Bearer token in headers)
 
@@ -406,7 +409,7 @@ Response:
 }
 ```
 
-- **DELETE** `/api/v1/comments/:id`: Delete a comment by ID
+### DELETE `/api/v1/comments/:id`: Delete a comment by ID
 
 Authentication required. (Bearer token in headers)
 
