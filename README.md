@@ -419,3 +419,13 @@ Response:
   "message": "Comment #<id> deleted successfully."
 }
 ```
+
+---
+
+# Possible Future Improvements
+- Add pagination to endpoints of blogs, comments.
+- Implement authorization to restrict users to only create, update, or delete their own blogs and comments. (Currently, users can perform this by merely being authenticated)
+- Implement admin role to manage tags. (Currently, any authenticated user can create, update, or delete tags)
+- Implement rate limiting to prevent abuse of the API.
+
+---
