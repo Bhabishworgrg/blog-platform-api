@@ -3,7 +3,7 @@ export const validateRegister = (req, res, next) => {
 
 	if (typeof username !== 'string' || typeof email !== 'string' || typeof password !== 'string') {
 		return res.status(400).json({
-			message: 'Username, email and password must be strings.'
+			message: 'Username, email and password are required and must be strings.'
 		})
 	}
 
