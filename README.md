@@ -11,7 +11,7 @@
 1. Clone the repository:
 ```bash
 git clone https://github.com/Bhabishworgrg/blog-platform-api.git
-cd blog-api
+cd blog-platform-api
 ```
 
 2. Install dependencies:
