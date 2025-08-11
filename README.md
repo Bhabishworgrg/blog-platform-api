@@ -10,13 +10,9 @@
 # Setup
 1. Clone the repository:
 ```bash
-git clone git@github.com:Bhabishworgrg/blog-api.git
+git clone https://github.com/Bhabishworgrg/blog-platform-api.git
 cd blog-api
 ```
-> ⚠️ GitHub doesn't allow authentication for private repositories via HTTPS anymore,
->so SSH link is provided here. 
-> If you prefer HTTPS, you can use `git clone https://github.com/Bhabishworgrg/blog-api.git`.
-> The simplest way, however, is to download the repository as a ZIP file from GitHub and extract it.
 
 2. Install dependencies:
 ```bash
